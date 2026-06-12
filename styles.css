@@ -388,7 +388,7 @@ canvas {
 
 .log {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   gap: 8px;
   max-height: min(28vh, 162px);
   margin: 0;
@@ -443,6 +443,37 @@ canvas {
   border-radius: 8px;
   background: #22382f;
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.46);
+}
+
+.river-scene.hunt-mode .river-water,
+.river-scene.hunt-mode .safe-channel,
+.river-scene.hunt-mode .scene-wagon {
+  display: none;
+}
+
+.river-scene.hunt-mode {
+  background: #1d3328;
+  cursor: crosshair;
+}
+
+.river-scene.hunt-mode .scene-panel {
+  cursor: default;
+}
+
+.river-scene.hunt-mode .river-sky {
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0 8%, rgba(14, 39, 27, 0.92) 8% 12%, transparent 12% 20%, rgba(19, 51, 34, 0.95) 20% 25%, transparent 25% 100%),
+    linear-gradient(180deg, #8ab6aa 0%, #6f8f58 48%, #253d2d 100%);
+}
+
+.river-scene.hunt-mode .river-hills {
+  inset: 22% 0 0;
+  background:
+    radial-gradient(circle at 18% 42%, #2f5a39 0 38px, transparent 39px),
+    radial-gradient(circle at 54% 34%, #366943 0 52px, transparent 53px),
+    radial-gradient(circle at 82% 45%, #2b5137 0 44px, transparent 45px),
+    linear-gradient(180deg, transparent 0 44%, #24412d 44% 100%);
 }
 
 .river-sky {
@@ -592,6 +623,25 @@ canvas {
   pointer-events: none;
 }
 
+.hunt-target {
+  position: absolute;
+  left: var(--target-x, 50%);
+  top: var(--target-y, 50%);
+  z-index: 2;
+  width: clamp(42px, 6vw, 70px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, #f4f1e9 0 16%, #ef7a72 17% 34%, #151915 35% 42%, #f1bd61 43% 100%);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.34);
+  cursor: crosshair;
+  transform: translate(-50%, -50%);
+}
+
+.hunt-target[hidden] {
+  display: none;
+}
+
 .river-scene.steering .safe-channel {
   opacity: 1;
 }
@@ -733,6 +783,24 @@ canvas {
 
 .start-crossing[hidden] {
   display: none;
+}
+
+.hunt-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 42px;
+  align-items: center;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.hunt-controls[hidden] {
+  display: none;
+}
+
+.hunt-controls strong {
+  color: var(--gold);
 }
 
 .steering-controls {

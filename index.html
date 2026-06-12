@@ -120,6 +120,16 @@
                 <strong id="medicineText">0 kits</strong>
               </div>
               <div class="meter">
+                <span>Ammo</span>
+                <div><i id="ammoBar"></i></div>
+                <strong id="ammoText">0 shots</strong>
+              </div>
+              <div class="meter">
+                <span>Parts</span>
+                <div><i id="partsBar"></i></div>
+                <strong id="partsText">0</strong>
+              </div>
+              <div class="meter">
                 <span>Wagon</span>
                 <div><i id="wagonBar"></i></div>
                 <strong id="wagonText">0%</strong>
@@ -190,6 +200,7 @@
           <div class="wheel right"></div>
         </div>
         <div class="safe-channel" aria-hidden="true"></div>
+        <button class="hunt-target" id="huntTarget" type="button" hidden aria-label="Hunting target"></button>
         <div class="floating-supplies" aria-hidden="true">
           <span></span>
           <span></span>
@@ -206,6 +217,12 @@
           </div>
           <div class="scene-choices" id="sceneChoices"></div>
           <button class="start-crossing" id="startCrossingButton" type="button" hidden>Start Crossing</button>
+          <button class="start-crossing" id="startHuntButton" type="button" hidden>Start Hunt</button>
+          <div class="hunt-controls" id="huntControls" hidden>
+            <span>Shots left: <strong id="shotsLeft">3</strong></span>
+            <span>Hits: <strong id="huntHits">0</strong></span>
+            <span>Misses: <strong id="huntMisses">0</strong></span>
+          </div>
           <div class="steering-controls" id="steeringControls" hidden>
             <button id="steerLeft" type="button">Left</button>
             <div>
@@ -218,6 +235,6 @@
       </div>
     </section>
 
-    <script src="./game.js"></script>
+    <script type="module" src="./game.js"></script>
   </body>
 </html>
