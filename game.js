@@ -83,6 +83,7 @@ function freshState() {
     pace: "steady",
     profession: "carpenter",
     pendingRiver: null,
+    scouted: false,
     crossedRivers: [],
     tutorialRiverUsed: false,
     weather: weather[0],
@@ -153,6 +154,7 @@ function loadGame() {
     state.weather = weather.find((item) => item.label === state.weather.label) || weather[0];
     state.ammo = Number.isFinite(state.ammo) ? state.ammo : 18;
     state.parts = Number.isFinite(state.parts) ? state.parts : 3;
+    state.scouted = Boolean(state.scouted);
     state.party = state.party.map((member, index) => ({
       ...member,
       trait: member.trait || [professionTrait(state.profession), ...companionTraits][index] || "trailwise"
@@ -248,8 +250,13 @@ function travel() {
 
   const scoutBonus = hasLivingTrait("trailwise") ? -5 : 0;
   const moraleBonus = hasLivingTrait("steady") && state.morale < 45 ? -4 : 0;
-  const risk = 12 + state.weather.risk + (state.pace === "fast" ? 10 : 0) + (state.wagon < 35 ? 8 : 0) + scoutBonus + moraleBonus;
+  const scoutingBonus = state.scouted ? -12 : 0;
+  const risk = 12 + state.weather.risk + (state.pace === "fast" ? 10 : 0) + (state.wagon < 35 ? 8 : 0) + scoutBonus + moraleBonus + scoutingBonus;
   addLog(`Traveled ${miles} miles through ${state.weather.label.toLowerCase()} weather.`);
+  if (state.scouted) {
+    addLog("The scout's route notes helped the wagon avoid the worst ground.");
+    state.scouted = false;
+  }
 
   if (Math.random() * 100 < risk) {
     const event = events[randomInt(0, events.length - 1)];
@@ -339,6 +346,21 @@ function repair() {
 function trade() {
   if (!state.started || state.over || state.pendingRiver) return;
   tradeScene.show();
+}
+
+function scout() {
+  if (!state.started || state.over || state.pendingRiver) return;
+  state.scouted = true;
+  state.morale += hasLivingTrait("trailwise") ? 1 : -1;
+  advanceDays(1);
+  consumeFood(0.35);
+  addLog(hasLivingTrait("trailwise")
+    ? "The scout found a safer line for tomorrow's travel."
+    : "The party spent time scouting a safer line for tomorrow's travel.");
+  normalize();
+  checkEnd();
+  render();
+  saveGame(false);
 }
 
 function normalize() {
@@ -548,6 +570,7 @@ document.querySelector("#huntButton").addEventListener("click", hunt);
 document.querySelector("#restButton").addEventListener("click", rest);
 document.querySelector("#repairButton").addEventListener("click", repair);
 document.querySelector("#tradeButton").addEventListener("click", trade);
+document.querySelector("#scoutButton").addEventListener("click", scout);
 document.querySelector("#restartButton").addEventListener("click", restart);
 els.saveButton.addEventListener("click", () => saveGame(true));
 els.continueButton.addEventListener("click", loadGame);

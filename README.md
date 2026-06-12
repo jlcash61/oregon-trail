@@ -30,6 +30,7 @@ If you use VS Code Live Server, open `index.html` through Live Server.
 - Choose a profession and starting loadout.
 - Manage food, medicine, ammunition, spare parts, wagon condition, morale, cash, and party health.
 - Travel at careful, steady, or fast pace.
+- Scout ahead to reduce risk on the next travel day.
 - Save and continue using browser local storage.
 - Hunt through a small skill challenge.
 - Cross rivers through a decision plus steering challenge.
