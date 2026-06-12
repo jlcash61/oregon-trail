@@ -21,7 +21,7 @@ export function createHuntScene({
     stopRiverScene();
     stop();
     els.actionScene.hidden = false;
-    els.riverScene.classList.remove("crossing-success", "crossing-fail", "steering");
+    els.riverScene.classList.remove("crossing-success", "crossing-fail", "steering", "event-mode");
     els.riverScene.classList.add("hunt-mode");
     els.riverScene.style.removeProperty("--wagon-x");
     els.riverScene.style.removeProperty("--wagon-y");

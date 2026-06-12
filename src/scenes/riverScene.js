@@ -20,7 +20,7 @@ export function createRiverScene({
     stop();
     stopHuntScene();
     els.riverScene.classList.remove("crossing-success", "crossing-fail", "steering");
-    els.riverScene.classList.remove("hunt-mode");
+    els.riverScene.classList.remove("hunt-mode", "trade-mode", "event-mode");
     els.riverScene.style.removeProperty("--wagon-x");
     els.riverScene.style.removeProperty("--wagon-y");
     els.steeringControls.hidden = true;

@@ -9,6 +9,7 @@ import {
   weather
 } from "./src/data.js";
 import { els } from "./src/dom.js";
+import { createEventScene } from "./src/scenes/eventScene.js";
 import { createHuntScene } from "./src/scenes/huntScene.js";
 import { createRiverScene } from "./src/scenes/riverScene.js";
 import { createTradeScene } from "./src/scenes/tradeScene.js";
@@ -64,6 +65,7 @@ let state;
 let huntScene;
 let riverScene;
 let tradeScene;
+let eventScene;
 
 function freshState() {
   return {
@@ -267,6 +269,11 @@ function travel() {
 
   normalize();
   checkEnd();
+  if (!state.over && Math.random() > 0.72) {
+    render();
+    eventScene.showRandom();
+    return;
+  }
   render();
   saveGame(false);
 }
@@ -467,6 +474,7 @@ function stopScenes() {
   riverScene?.stop();
   huntScene?.stop();
   tradeScene?.stop();
+  eventScene?.stop();
 }
 
 huntScene = createHuntScene({
@@ -516,6 +524,22 @@ tradeScene = createTradeScene({
   saveGame,
   stopRiverScene: () => riverScene.stop(),
   stopHuntScene: () => huntScene.stop()
+});
+
+eventScene = createEventScene({
+  els,
+  randomInt,
+  getState: () => state,
+  hasLivingTrait,
+  damageRandomMember,
+  addLog,
+  normalize,
+  checkEnd,
+  render,
+  saveGame,
+  stopRiverScene: () => riverScene.stop(),
+  stopHuntScene: () => huntScene.stop(),
+  stopTradeScene: () => tradeScene.stop()
 });
 
 els.setupForm.addEventListener("submit", startGame);

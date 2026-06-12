@@ -34,6 +34,7 @@ If you use VS Code Live Server, open `index.html` through Live Server.
 - Hunt through a small skill challenge.
 - Cross rivers through a decision plus steering challenge.
 - Trade through a market scene with cash and barter offers.
+- Encounter random trail opportunity scenes after some travel days.
 - First river crossing includes a tutorial-style retry.
 - Party traits affect survival, hunting, travel, repairs, and recovery.
 
@@ -50,6 +51,7 @@ If you use VS Code Live Server, open `index.html` through Live Server.
     |-- trailMap.js
     |-- utils.js
     `-- scenes
+        |-- eventScene.js
         |-- huntScene.js
         |-- riverScene.js
         `-- tradeScene.js
@@ -70,6 +72,7 @@ If you use VS Code Live Server, open `index.html` through Live Server.
 
 ### Scene Modules
 
+- `src/scenes/eventScene.js` owns random trail opportunities and reward/risk decisions.
 - `src/scenes/huntScene.js` owns the hunting challenge.
 - `src/scenes/riverScene.js` owns river choices, steering, retries, and river outcomes.
 - `src/scenes/tradeScene.js` owns market offers, barter choices, and trade outcomes.
@@ -88,6 +91,7 @@ node --check src/data.js
 node --check src/dom.js
 node --check src/utils.js
 node --check src/trailMap.js
+node --check src/scenes/eventScene.js
 node --check src/scenes/huntScene.js
 node --check src/scenes/riverScene.js
 node --check src/scenes/tradeScene.js

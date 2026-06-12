@@ -449,7 +449,9 @@ canvas {
 .river-scene.hunt-mode .safe-channel,
 .river-scene.hunt-mode .scene-wagon,
 .river-scene.trade-mode .river-water,
-.river-scene.trade-mode .safe-channel {
+.river-scene.trade-mode .safe-channel,
+.river-scene.event-mode .river-water,
+.river-scene.event-mode .safe-channel {
   display: none;
 }
 
@@ -460,6 +462,10 @@ canvas {
 
 .river-scene.trade-mode {
   background: #2c3324;
+}
+
+.river-scene.event-mode {
+  background: #26362f;
 }
 
 .river-scene.hunt-mode .scene-panel {
@@ -496,6 +502,22 @@ canvas {
     radial-gradient(circle at 18% 60%, #59462d 0 42px, transparent 43px),
     radial-gradient(circle at 76% 58%, #4c3e2d 0 54px, transparent 55px),
     linear-gradient(180deg, transparent 0 45%, #293928 45% 100%);
+}
+
+.river-scene.event-mode .river-sky {
+  inset: 0;
+  background:
+    radial-gradient(circle at 76% 20%, rgba(255, 226, 148, 0.82), transparent 70px),
+    linear-gradient(180deg, #95b8a3 0%, #b49d62 48%, #41543a 100%);
+}
+
+.river-scene.event-mode .river-hills {
+  inset: 24% 0 0;
+  background:
+    radial-gradient(circle at 22% 52%, #345c38 0 54px, transparent 55px),
+    radial-gradient(circle at 62% 48%, #2f5136 0 62px, transparent 63px),
+    linear-gradient(90deg, transparent 0 58%, rgba(91, 55, 28, 0.8) 58% 68%, transparent 68% 100%),
+    linear-gradient(180deg, transparent 0 42%, #2d4431 42% 100%);
 }
 
 .river-sky {
