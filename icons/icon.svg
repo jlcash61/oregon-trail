@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Oregon Trail: Modern Passage icon</title>
+  <desc id="desc">A covered wagon rolling along a golden trail under mountains.</desc>
+  <rect width="512" height="512" rx="96" fill="#13251f"/>
+  <path d="M0 350c75-34 142-40 202-18 61 22 112 19 168-11 46-25 92-34 142-17v208H0z" fill="#4f754d"/>
+  <path d="M0 155 78 65l88 127 77-96 82 119 74-88 113 136v93H0z" fill="#335349"/>
+  <path d="m0 246 92-101 74 91 77-82 82 101 73-75 114 123v65H0z" fill="#203b35"/>
+  <circle cx="394" cy="118" r="48" fill="#f1d987"/>
+  <path d="M72 340c80-36 157-52 231-47 51 3 97 16 137 39" fill="none" stroke="#d3bd74" stroke-width="42" stroke-linecap="round"/>
+  <path d="M74 340c78-34 153-49 226-44 51 3 97 15 138 38" fill="none" stroke="#fff1b8" stroke-width="8" stroke-linecap="round" stroke-dasharray="18 20" opacity=".9"/>
+  <g filter="url(#shadow)">
+    <path d="M132 300h133v67H132z" fill="#8f5d35"/>
+    <path d="M150 300c8-52 27-78 58-78 32 0 53 26 63 78z" fill="#f4f1e9"/>
+    <path d="M116 335h165v38H116z" fill="#6b432a"/>
+    <circle cx="151" cy="376" r="26" fill="#151915"/>
+    <circle cx="151" cy="376" r="15" fill="#f1bd61"/>
+    <circle cx="248" cy="376" r="26" fill="#151915"/>
+    <circle cx="248" cy="376" r="15" fill="#f1bd61"/>
+  </g>
+  <defs>
+    <filter id="shadow" x="80" y="198" width="240" height="225" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="16" stdDeviation="10" flood-color="#000" flood-opacity=".32"/>
+    </filter>
+  </defs>
+</svg>

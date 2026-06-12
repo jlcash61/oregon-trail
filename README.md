@@ -32,6 +32,7 @@ If you use VS Code Live Server, open `index.html` through Live Server.
 - Travel at careful, steady, or fast pace.
 - Scout ahead to reduce risk on the next travel day.
 - Save and continue using browser local storage.
+- Install from supported browsers with app icons and a web manifest.
 - Hunt through a small skill challenge.
 - Cross rivers through a decision plus steering challenge.
 - Trade through a market scene with cash and barter offers.
@@ -46,6 +47,8 @@ If you use VS Code Live Server, open `index.html` through Live Server.
 |-- index.html
 |-- styles.css
 |-- game.js
+|-- manifest.webmanifest
+|-- icons
 `-- src
     |-- data.js
     |-- dom.js
@@ -63,6 +66,7 @@ If you use VS Code Live Server, open `index.html` through Live Server.
 - `index.html` defines the game UI, setup form, dashboard, action scene overlay, and controls.
 - `styles.css` contains the full visual design and responsive layout.
 - `game.js` owns the campaign loop: state, travel, rest, repair, trade, save/load, rendering, and event wiring.
+- `manifest.webmanifest` and `icons/` provide install metadata and home-screen icons.
 
 ### Shared Modules
 
