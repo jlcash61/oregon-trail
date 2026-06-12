@@ -113,9 +113,9 @@ export function createHuntScene({
     const hits = hunting.hits;
     const misses = hunting.misses;
     stop();
-    const gain = hits === 0 ? randomInt(8, 18) : randomInt(48, 72) * hits + professions[state.profession].huntBonus;
+    const gain = hits === 0 ? randomInt(12, 24) : randomInt(78, 108) * hits + professions[state.profession].huntBonus;
     state.food += gain;
-    state.morale += hits > 1 ? 4 : -2 - misses;
+    state.morale += hits > 0 ? hits + 1 : -2 - misses;
     if ((hits === 0 || misses > hits) && Math.random() > 0.62) {
       damageRandomMember(state, randomInt(4, 10));
       addLog("A rough hunt left one party member scraped up.");

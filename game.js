@@ -374,7 +374,7 @@ function checkEnd() {
   } else if (!livingParty().length) {
     state.over = true;
     showModal("Journey ended", "No one survived", "The trail claimed the whole party. Better supply choices and more rest may change the next run.");
-  } else if (state.day > 185) {
+  } else if (state.day > 210) {
     state.over = true;
     showModal("Winter caught you", "The season closed in", "The wagon did not reach Oregon before the mountain passes became too dangerous.");
   }

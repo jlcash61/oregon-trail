@@ -32,9 +32,9 @@ export const riverCrossings = [
 ];
 
 export const paceConfig = {
-  careful: { label: "Careful", miles: [10, 16], food: 12, stress: -2, wagon: -1 },
-  steady: { label: "Steady", miles: [15, 24], food: 15, stress: 1, wagon: -2 },
-  fast: { label: "Fast", miles: [22, 34], food: 19, stress: 4, wagon: -4 }
+  careful: { label: "Careful", miles: [10, 16], food: 10, stress: -2, wagon: -1 },
+  steady: { label: "Steady", miles: [15, 24], food: 12, stress: 1, wagon: -2 },
+  fast: { label: "Fast", miles: [22, 34], food: 16, stress: 4, wagon: -4 }
 };
 
 export const weather = [
