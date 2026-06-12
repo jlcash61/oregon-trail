@@ -33,6 +33,7 @@ If you use VS Code Live Server, open `index.html` through Live Server.
 - Save and continue using browser local storage.
 - Hunt through a small skill challenge.
 - Cross rivers through a decision plus steering challenge.
+- Trade through a market scene with cash and barter offers.
 - First river crossing includes a tutorial-style retry.
 - Party traits affect survival, hunting, travel, repairs, and recovery.
 
@@ -50,7 +51,8 @@ If you use VS Code Live Server, open `index.html` through Live Server.
     |-- utils.js
     `-- scenes
         |-- huntScene.js
-        `-- riverScene.js
+        |-- riverScene.js
+        `-- tradeScene.js
 ```
 
 ### Main Files
@@ -70,6 +72,7 @@ If you use VS Code Live Server, open `index.html` through Live Server.
 
 - `src/scenes/huntScene.js` owns the hunting challenge.
 - `src/scenes/riverScene.js` owns river choices, steering, retries, and river outcomes.
+- `src/scenes/tradeScene.js` owns market offers, barter choices, and trade outcomes.
 
 The goal is for challenge scenes to grow independently from the main map game. New action scenes should generally live under `src/scenes/`.
 
@@ -87,6 +90,7 @@ node --check src/utils.js
 node --check src/trailMap.js
 node --check src/scenes/huntScene.js
 node --check src/scenes/riverScene.js
+node --check src/scenes/tradeScene.js
 ```
 
 If `node` is not on your PATH, use any installed Node.js executable for the same checks.
@@ -95,6 +99,7 @@ If `node` is not on your PATH, use any installed Node.js executable for the same
 
 - Improve hunting into a richer skill challenge.
 - Add action scenes for wagon repair, trading, illness treatment, and landmark events.
+- Expand trade with rotating offers and trader personalities.
 - Add more character depth, party relationships, and role-specific decisions.
 - Make trade a real choice instead of an automatic best-effort action.
 - Add more river types and terrain hazards.

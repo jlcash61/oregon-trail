@@ -43,6 +43,7 @@ export const els = {
   actionScene: document.querySelector("#actionScene"),
   sceneTitle: document.querySelector("#sceneTitle"),
   sceneText: document.querySelector("#sceneText"),
+  sceneMeterLabel: document.querySelector("#sceneMeterLabel"),
   sceneRiskBar: document.querySelector("#sceneRiskBar"),
   sceneRiskText: document.querySelector("#sceneRiskText"),
   sceneChoices: document.querySelector("#sceneChoices"),

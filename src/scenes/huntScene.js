@@ -33,8 +33,9 @@ export function createHuntScene({
     els.startHuntButton.hidden = false;
     els.sceneTitle.textContent = "Hunting Grounds";
     els.sceneText.textContent = hasLivingTrait("sharpshot")
-      ? "Your sharpshot can take one extra shot. Each shot spends ammunition. Click the target to hit, click elsewhere and you miss."
-      : "Each shot spends ammunition. Click the target to hit, click elsewhere and you miss.";
+      ? "Your sharpshot can take one extra shot. Each shot spends ammunition. Wait for a clean line, then click the target."
+      : "Each shot spends ammunition. Wait for a clean line, then click the target.";
+    els.sceneMeterLabel.textContent = "Hunt";
     els.sceneRiskText.textContent = "Skill";
     els.sceneRiskBar.style.width = hasLivingTrait("sharpshot") ? "78%" : "58%";
     els.startHuntButton.onclick = start;
@@ -53,7 +54,7 @@ export function createHuntScene({
       hits: 0,
       misses: 0,
       startedAt: performance.now(),
-      duration: 6200,
+      duration: 9200,
       frame: null
     };
 
@@ -64,8 +65,8 @@ export function createHuntScene({
   function runFrame(now) {
     if (!hunting) return;
     const progress = clamp((now - hunting.startedAt) / hunting.duration, 0, 1);
-    const x = 18 + Math.abs(Math.sin(progress * Math.PI * 2.4)) * 64;
-    const y = 30 + Math.sin(progress * Math.PI * 5.2) * 14 + Math.cos(progress * Math.PI * 2) * 8;
+    const x = 22 + Math.abs(Math.sin(progress * Math.PI * 1.45)) * 56;
+    const y = 34 + Math.sin(progress * Math.PI * 3.2) * 10 + Math.cos(progress * Math.PI * 1.4) * 6;
     els.huntTarget.style.setProperty("--target-x", `${x}%`);
     els.huntTarget.style.setProperty("--target-y", `${clamp(y, 20, 68)}%`);
 
@@ -112,7 +113,7 @@ export function createHuntScene({
     const hits = hunting.hits;
     const misses = hunting.misses;
     stop();
-    const gain = hits === 0 ? randomInt(0, 10) : randomInt(24, 40) * hits + professions[state.profession].huntBonus;
+    const gain = hits === 0 ? randomInt(8, 18) : randomInt(48, 72) * hits + professions[state.profession].huntBonus;
     state.food += gain;
     state.morale += hits > 1 ? 4 : -2 - misses;
     if ((hits === 0 || misses > hits) && Math.random() > 0.62) {

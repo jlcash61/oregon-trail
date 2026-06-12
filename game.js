@@ -11,6 +11,7 @@ import {
 import { els } from "./src/dom.js";
 import { createHuntScene } from "./src/scenes/huntScene.js";
 import { createRiverScene } from "./src/scenes/riverScene.js";
+import { createTradeScene } from "./src/scenes/tradeScene.js";
 import { startTrailMap } from "./src/trailMap.js";
 import { clamp, formatDate, randomInt } from "./src/utils.js";
 
@@ -62,6 +63,7 @@ const events = [
 let state;
 let huntScene;
 let riverScene;
+let tradeScene;
 
 function freshState() {
   return {
@@ -329,33 +331,7 @@ function repair() {
 
 function trade() {
   if (!state.started || state.over || state.pendingRiver) return;
-  if (state.ammo < 6 && state.cash >= 12) {
-    state.cash -= 12;
-    state.ammo += 8;
-    addLog("Traded $12 for 8 shots of ammunition.");
-  } else if (state.parts < 2 && state.cash >= 18) {
-    state.cash -= 18;
-    state.parts += 2;
-    addLog("Traded $18 for 2 spare wagon parts.");
-  } else if (state.cash >= 20) {
-    state.cash -= 20;
-    state.food += 70;
-    state.morale += 2;
-    addLog("Traded $20 for 70 lb of food.");
-  } else if (state.medicine > 0) {
-    state.medicine -= 1;
-    state.food += 45;
-    addLog("Traded one medicine kit for 45 lb of food.");
-  } else {
-    state.morale -= 6;
-    addLog("No trader was willing to make a useful deal.");
-  }
-  advanceDays(1);
-  consumeFood(0.4);
-  normalize();
-  checkEnd();
-  render();
-  saveGame(false);
+  tradeScene.show();
 }
 
 function normalize() {
@@ -490,6 +466,7 @@ function restart() {
 function stopScenes() {
   riverScene?.stop();
   huntScene?.stop();
+  tradeScene?.stop();
 }
 
 huntScene = createHuntScene({
@@ -523,6 +500,21 @@ riverScene = createRiverScene({
   checkEnd,
   render,
   saveGame,
+  stopHuntScene: () => huntScene.stop()
+});
+
+tradeScene = createTradeScene({
+  els,
+  getState: () => state,
+  hasLivingTrait,
+  advanceDays,
+  consumeFood,
+  addLog,
+  normalize,
+  checkEnd,
+  render,
+  saveGame,
+  stopRiverScene: () => riverScene.stop(),
   stopHuntScene: () => huntScene.stop()
 });
 

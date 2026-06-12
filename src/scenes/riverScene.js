@@ -29,6 +29,7 @@ export function createRiverScene({
     els.sceneTitle.textContent = river.name;
     els.sceneText.textContent = `The river is ${river.depth} deep and about ${river.width} wide. Pick a crossing method first. After that, you will steer the wagon through the bright channel.`;
     els.sceneChoices.innerHTML = "";
+    els.sceneMeterLabel.textContent = "Crossing Risk";
     els.sceneRiskBar.style.width = `${estimateRisk(river, "ford")}%`;
     els.sceneRiskText.textContent = riskLabel(estimateRisk(river, "ford"));
 

@@ -447,13 +447,19 @@ canvas {
 
 .river-scene.hunt-mode .river-water,
 .river-scene.hunt-mode .safe-channel,
-.river-scene.hunt-mode .scene-wagon {
+.river-scene.hunt-mode .scene-wagon,
+.river-scene.trade-mode .river-water,
+.river-scene.trade-mode .safe-channel {
   display: none;
 }
 
 .river-scene.hunt-mode {
   background: #1d3328;
   cursor: crosshair;
+}
+
+.river-scene.trade-mode {
+  background: #2c3324;
 }
 
 .river-scene.hunt-mode .scene-panel {
@@ -474,6 +480,22 @@ canvas {
     radial-gradient(circle at 54% 34%, #366943 0 52px, transparent 53px),
     radial-gradient(circle at 82% 45%, #2b5137 0 44px, transparent 45px),
     linear-gradient(180deg, transparent 0 44%, #24412d 44% 100%);
+}
+
+.river-scene.trade-mode .river-sky {
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0 10%, rgba(70, 43, 23, 0.82) 10% 15%, transparent 15% 32%, rgba(91, 55, 28, 0.86) 32% 38%, transparent 38% 100%),
+    linear-gradient(180deg, #d5a86b 0%, #89724a 50%, #30412e 100%);
+}
+
+.river-scene.trade-mode .river-hills {
+  inset: 26% 0 0;
+  background:
+    linear-gradient(90deg, transparent 0 18%, #6f472b 18% 30%, transparent 30% 38%, #815735 38% 52%, transparent 52% 100%),
+    radial-gradient(circle at 18% 60%, #59462d 0 42px, transparent 43px),
+    radial-gradient(circle at 76% 58%, #4c3e2d 0 54px, transparent 55px),
+    linear-gradient(180deg, transparent 0 45%, #293928 45% 100%);
 }
 
 .river-sky {
@@ -628,7 +650,7 @@ canvas {
   left: var(--target-x, 50%);
   top: var(--target-y, 50%);
   z-index: 2;
-  width: clamp(42px, 6vw, 70px);
+  width: clamp(58px, 7vw, 88px);
   aspect-ratio: 1;
   border-radius: 999px;
   background:
@@ -754,6 +776,15 @@ canvas {
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.1);
   text-align: left;
+}
+
+.scene-choices button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.scene-choices .quiet-choice {
+  background: rgba(244, 241, 233, 0.08);
 }
 
 .scene-choices strong,
