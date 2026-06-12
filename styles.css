@@ -861,6 +861,7 @@ canvas {
   grid-template-columns: 82px 1fr 82px;
   gap: 10px;
   align-items: center;
+  touch-action: none;
 }
 
 .steering-controls[hidden] {
@@ -873,6 +874,10 @@ canvas {
   background: #f4f1e9;
   color: var(--ink);
   font-weight: 900;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .steering-controls div {

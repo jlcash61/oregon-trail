@@ -577,12 +577,8 @@ els.continueButton.addEventListener("click", loadGame);
 els.modalButton.addEventListener("click", restart);
 els.riverScene.addEventListener("click", huntScene.handleSceneClick);
 els.huntTarget.addEventListener("click", huntScene.handleTargetClick);
-els.steerLeft.addEventListener("pointerdown", () => riverScene.setSteer(1));
-els.steerRight.addEventListener("pointerdown", () => riverScene.setSteer(-1));
-els.steerLeft.addEventListener("pointerup", () => riverScene.clearSteer(1));
-els.steerRight.addEventListener("pointerup", () => riverScene.clearSteer(-1));
-els.steerLeft.addEventListener("pointerleave", () => riverScene.clearSteer(1));
-els.steerRight.addEventListener("pointerleave", () => riverScene.clearSteer(-1));
+bindSteeringButton(els.steerLeft, 1);
+bindSteeringButton(els.steerRight, -1);
 
 window.addEventListener("keydown", (event) => {
   if (!riverScene.isSteering()) return;
@@ -609,6 +605,32 @@ document.querySelectorAll(".pace-option").forEach((button) => {
     render();
   });
 });
+
+function bindSteeringButton(button, direction) {
+  const start = (event) => {
+    event.preventDefault();
+    if (event.pointerId !== undefined && button.setPointerCapture) {
+      button.setPointerCapture(event.pointerId);
+    }
+    riverScene.setSteer(direction);
+  };
+
+  const stop = (event) => {
+    event.preventDefault();
+    riverScene.clearSteer(direction);
+  };
+
+  button.addEventListener("pointerdown", start);
+  button.addEventListener("pointerup", stop);
+  button.addEventListener("pointercancel", stop);
+  button.addEventListener("lostpointercapture", stop);
+  button.addEventListener("mouseleave", stop);
+  button.addEventListener("touchstart", start, { passive: false });
+  button.addEventListener("touchend", stop, { passive: false });
+  button.addEventListener("touchcancel", stop, { passive: false });
+  button.addEventListener("mousedown", start);
+  button.addEventListener("mouseup", stop);
+}
 
 restart();
 startTrailMap({
