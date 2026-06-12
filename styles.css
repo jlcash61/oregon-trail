@@ -428,6 +428,10 @@ canvas {
   place-items: center;
   padding: clamp(12px, 2vw, 24px);
   background: rgba(6, 9, 8, 0.82);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .action-scene[hidden] {
@@ -443,6 +447,10 @@ canvas {
   border-radius: 8px;
   background: #22382f;
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.46);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .river-scene.hunt-mode .river-water,
@@ -862,6 +870,9 @@ canvas {
   gap: 10px;
   align-items: center;
   touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .steering-controls[hidden] {
@@ -877,7 +888,14 @@ canvas {
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
+  -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
+}
+
+.steering-controls * {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .steering-controls div {

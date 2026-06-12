@@ -609,15 +609,23 @@ document.querySelectorAll(".pace-option").forEach((button) => {
 function bindSteeringButton(button, direction) {
   const start = (event) => {
     event.preventDefault();
+    event.stopPropagation();
     if (event.pointerId !== undefined && button.setPointerCapture) {
       button.setPointerCapture(event.pointerId);
     }
+    button.blur();
     riverScene.setSteer(direction);
   };
 
   const stop = (event) => {
     event.preventDefault();
+    event.stopPropagation();
     riverScene.clearSteer(direction);
+  };
+
+  const blockBrowserGesture = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
   };
 
   button.addEventListener("pointerdown", start);
@@ -626,10 +634,15 @@ function bindSteeringButton(button, direction) {
   button.addEventListener("lostpointercapture", stop);
   button.addEventListener("mouseleave", stop);
   button.addEventListener("touchstart", start, { passive: false });
+  button.addEventListener("touchmove", blockBrowserGesture, { passive: false });
   button.addEventListener("touchend", stop, { passive: false });
   button.addEventListener("touchcancel", stop, { passive: false });
   button.addEventListener("mousedown", start);
   button.addEventListener("mouseup", stop);
+  button.addEventListener("click", blockBrowserGesture);
+  button.addEventListener("contextmenu", blockBrowserGesture);
+  button.addEventListener("selectstart", blockBrowserGesture);
+  button.addEventListener("dragstart", blockBrowserGesture);
 }
 
 restart();
