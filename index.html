@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oregon Trail: Modern Passage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="game" aria-label="Oregon Trail game">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Independence to Oregon City</p>
+            <h1>Oregon Trail: Modern Passage</h1>
+          </div>
+          <div class="top-actions">
+            <button class="ghost-button" id="saveButton">Save</button>
+            <button class="ghost-button" id="continueButton">Continue</button>
+            <div class="date-chip" id="dateChip">April 1, 1848</div>
+          </div>
+        </header>
+
+        <section class="hero">
+          <canvas id="trailCanvas" width="1100" height="520" aria-label="Animated trail map"></canvas>
+          <div class="journey-panel">
+            <div>
+              <span class="label">Miles Traveled</span>
+              <strong id="miles">0</strong>
+            </div>
+            <div>
+              <span class="label">Landmark</span>
+              <strong id="landmark">Independence</strong>
+            </div>
+            <div>
+              <span class="label">Pace</span>
+              <strong id="paceLabel">Steady</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="setup-panel" id="setupPanel">
+          <div class="setup-copy">
+            <p class="eyebrow">Trail Office</p>
+            <h2>Choose your party and supplies before leaving Independence.</h2>
+            <p>
+              The goal is simple: reach Oregon City before winter. The hard part is deciding when to push,
+              when to rest, and what risks are worth taking.
+            </p>
+          </div>
+          <form class="setup-form" id="setupForm">
+            <label>
+              Leader
+              <input id="leaderName" maxlength="14" value="Clara" />
+            </label>
+            <label>
+              Companion
+              <input id="companionOne" maxlength="14" value="Elias" />
+            </label>
+            <label>
+              Companion
+              <input id="companionTwo" maxlength="14" value="Mabel" />
+            </label>
+            <label>
+              Companion
+              <input id="companionThree" maxlength="14" value="Jonas" />
+            </label>
+            <label>
+              Profession
+              <select id="professionSelect">
+                <option value="carpenter">Carpenter: stronger repairs</option>
+                <option value="doctor">Doctor: extra medicine</option>
+                <option value="hunter">Hunter: better hunts</option>
+                <option value="merchant">Merchant: more cash</option>
+              </select>
+            </label>
+            <label>
+              Starting Supplies
+              <select id="loadoutSelect">
+                <option value="balanced">Balanced wagon</option>
+                <option value="food">Food-heavy wagon</option>
+                <option value="tools">Tools and medicine</option>
+              </select>
+            </label>
+            <button type="submit">Start West</button>
+          </form>
+        </section>
+
+        <section class="dashboard" id="dashboard">
+          <article class="panel status-panel">
+            <div class="panel-head">
+              <h2>Party</h2>
+              <button class="icon-button" id="restartButton" title="Restart game" aria-label="Restart game">
+                <span aria-hidden="true">&#8635;</span>
+              </button>
+            </div>
+            <div class="party" id="party"></div>
+          </article>
+
+          <article class="panel supplies-panel">
+            <div class="panel-head">
+              <h2>Supplies</h2>
+              <span id="weatherBadge" class="badge">Clear</span>
+            </div>
+            <div class="meters">
+              <div class="meter">
+                <span>Food</span>
+                <div><i id="foodBar"></i></div>
+                <strong id="foodText">0 lb</strong>
+              </div>
+              <div class="meter">
+                <span>Medicine</span>
+                <div><i id="medicineBar"></i></div>
+                <strong id="medicineText">0 kits</strong>
+              </div>
+              <div class="meter">
+                <span>Wagon</span>
+                <div><i id="wagonBar"></i></div>
+                <strong id="wagonText">0%</strong>
+              </div>
+              <div class="meter">
+                <span>Morale</span>
+                <div><i id="moraleBar"></i></div>
+                <strong id="moraleText">0%</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel controls-panel">
+            <div class="panel-head">
+              <h2>Decisions</h2>
+              <span class="badge" id="cashBadge">$80</span>
+            </div>
+            <div class="segmented" role="group" aria-label="Travel pace">
+              <button class="pace-option" data-pace="careful">Careful</button>
+              <button class="pace-option active" data-pace="steady">Steady</button>
+              <button class="pace-option" data-pace="fast">Fast</button>
+            </div>
+            <div class="actions">
+              <button id="travelButton">Travel</button>
+              <button id="huntButton">Hunt</button>
+              <button id="restButton">Rest</button>
+              <button id="repairButton">Repair</button>
+              <button id="tradeButton">Trade</button>
+            </div>
+          </article>
+
+          <article class="panel log-panel">
+            <div class="panel-head">
+              <h2>Trail Journal</h2>
+              <span class="badge" id="turnBadge">Day 1</span>
+            </div>
+            <ol id="log" class="log" aria-live="polite"></ol>
+          </article>
+        </section>
+      </section>
+    </main>
+
+    <div class="modal" id="modal" hidden>
+      <div class="modal-card">
+        <p class="eyebrow" id="modalEyebrow">Trail Report</p>
+        <h2 id="modalTitle">You made it</h2>
+        <p id="modalText"></p>
+        <div class="choice-list" id="choiceList"></div>
+        <button id="modalButton">Play Again</button>
+      </div>
+    </div>
+
+    <section class="action-scene" id="actionScene" aria-label="River crossing decision" hidden>
+      <div class="river-scene">
+        <div class="river-sky"></div>
+        <div class="river-hills"></div>
+        <div class="river-water">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="river-bank near"></div>
+        <div class="river-bank far"></div>
+        <div class="scene-wagon" aria-hidden="true">
+          <div class="cover"></div>
+          <div class="bed"></div>
+          <div class="wheel left"></div>
+          <div class="wheel right"></div>
+        </div>
+        <div class="safe-channel" aria-hidden="true"></div>
+        <div class="floating-supplies" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="scene-panel">
+          <p class="eyebrow">Decision Time</p>
+          <h2 id="sceneTitle">Kansas River</h2>
+          <p id="sceneText"></p>
+          <div class="risk-meter">
+            <span>Crossing Risk</span>
+            <div><i id="sceneRiskBar"></i></div>
+            <strong id="sceneRiskText">Medium</strong>
+          </div>
+          <div class="scene-choices" id="sceneChoices"></div>
+          <button class="start-crossing" id="startCrossingButton" type="button" hidden>Start Crossing</button>
+          <div class="steering-controls" id="steeringControls" hidden>
+            <button id="steerLeft" type="button">Left</button>
+            <div>
+              <span>Keep the wagon in the bright channel</span>
+              <strong id="steerScore">Hold steady</strong>
+            </div>
+            <button id="steerRight" type="button">Right</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="./game.js"></script>
+  </body>
+</html>
